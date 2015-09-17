@@ -1,5 +1,15 @@
 printf '\033[0;34m%s\033[0m\n' "Upgrading Oh My Zsh"
 cd "$ZSH"
+
+if $FORKED_REPO
+then
+  git fetch upstream
+  git checkout master
+  git stash
+  git pull --rebase --stat origin master
+  git merge upstream/master
+
+fi
 if git pull --rebase --stat origin master
 then
   printf '\033[0;32m%s\033[0m\n' '         __                                     __   '
